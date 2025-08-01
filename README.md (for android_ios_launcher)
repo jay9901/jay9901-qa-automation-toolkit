@@ -17,3 +17,40 @@ Before running mobile automation tests, the app must be launched on a device or 
 - `appium-python-client` installed:
 ```bash
 pip install Appium-Python-Client
+
+
+
+
+🧠 How It Works
+
+The script uses desired capabilities, such as:
+
+| Capability       | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `platformName`   | OS of the device (`Android` or `iOS`)          |
+| `deviceName`     | Name of emulator or real device                |
+| `appPackage`     | (Android) Unique package name of the app       |
+| `appActivity`    | (Android) Main activity to be launched         |
+| `bundleId`       | (iOS) Unique identifier of the app             |
+| `automationName` | Automation engine: `UiAutomator2` / `XCUITest` |
+
+
+
+🧪 Sample Use Cases
+
+    Launch app before running tests
+
+    Sanity check if app installs and opens properly
+
+    Troubleshoot app startup issues
+
+
+
+🔧 Notes
+
+    Ensure your emulator/simulator or device is running
+
+    Appium server must be started first:
+
+bash:
+appium
