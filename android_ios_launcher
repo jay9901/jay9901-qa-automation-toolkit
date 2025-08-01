@@ -1,0 +1,60 @@
+# launcher.py
+
+from appium import webdriver
+import argparse
+import time
+
+def launch_android_app(app_package, app_activity, device_name="Android Emulator"):
+    desired_caps = {
+        "platformName": "Android",
+        "deviceName": device_name,
+        "appPackage": app_package,
+        "appActivity": app_activity,
+        "automationName": "UiAutomator2",
+        "noReset": True
+    }
+
+    print("[INFO] Launching Android app...")
+    driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+    time.sleep(5)
+    print("[INFO] App launched successfully!")
+    driver.quit()
+
+def launch_ios_app(bundle_id, device_name="iPhone Simulator"):
+    desired_caps = {
+        "platformName": "iOS",
+        "deviceName": device_name,
+        "platformVersion": "14.5",  # adjust as per your simulator
+        "bundleId": bundle_id,
+        "automationName": "XCUITest",
+        "noReset": True
+    }
+
+    print("[INFO] Launching iOS app...")
+    driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+    time.sleep(5)
+    print("[INFO] App launched successfully!")
+    driver.quit()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Launch Android or iOS app using Appium")
+
+    parser.add_argument("--platform", choices=["android", "ios"], required=True, help="Mobile platform")
+    parser.add_argument("--package", help="Android app package")
+    parser.add_argument("--activity", help="Android app main activity")
+    parser.add_argument("--bundle", help="iOS app bundle ID")
+    parser.add_argument("--device", default="Android Emulator", help="Device name (emulator or real device)")
+
+    args = parser.parse_args()
+
+    if args.platform == "android":
+        if not args.package or not args.activity:
+            print("[ERROR] Android requires --package and --activity")
+        else:
+            launch_android_app(args.package, args.activity, args.device)
+
+    elif args.platform == "ios":
+        if not args.bundle:
+            print("[ERROR] iOS requires --bundle")
+        else:
+            launch_ios_app(args.bundle, args.device)
