@@ -1,0 +1,19 @@
+# 📱 App Launcher (Android & iOS)
+
+This tool helps QA engineers **quickly launch Android and iOS apps** using Appium by setting the required **desired capabilities**.
+
+---
+
+## 💡 Why Is This Useful?
+
+Before running mobile automation tests, the app must be launched on a device or emulator. This script sets up all the required settings and connects to the Appium server to open the app.
+
+---
+
+## ⚙️ Requirements
+
+- Python 3.x
+- Appium server running on `localhost:4723`
+- `appium-python-client` installed:
+```bash
+pip install Appium-Python-Client
